@@ -9,25 +9,28 @@ function Courcelist() {
         price:"bootstrap",
         title:199,
         display:true
+        ,rating:3
 
     },{
         img:tail,
         price:" tailwind",
         title:199
-        ,display:true
+        ,display:true,rating:5
     },{
         img:Boot,
         price:"react",
         title:499,
-        display:true
+        display:true,rating:4.5
     },{
         img:js,
         price:"Java Script",
         title:299
-        ,display:true
+        ,display:true,rating:4
     }
 ];
-    const Courcelist=Courcelist1.map((val)=><User img={val.img} price={val.price} title={val.price} display={val.display}/>);
+    Courcelist1.sort((a,b)=>b.title-a.title);//sort method is used to sort price
+    const rating=Courcelist1.filter((a)=>a.rating>4)//filter method is used to sort by rating
+    const Courcelist=rating.map((val)=><User img={val.img} price={val.price} title={val.title} display={val.display} rating={val.rating}/>);
   return (
     <>
     {Courcelist}

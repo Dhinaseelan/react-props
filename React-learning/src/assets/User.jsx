@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 import './user.css';
 
-function User({ img, price, title, display }) {
+function User({ img, price, title, display ,rating}) {
   if (display==true) {
     return (
       <div className="box">
         <img src={img} alt="user" />
         <h3>{price}</h3>
-        <h2>{title}</h2>
+        <h4> Rating:<span style={{color:"red"}}>{rating}</span></h4>
+        <h2>${title}</h2>
       </div>
     );
   } else {
