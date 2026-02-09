@@ -2,15 +2,16 @@ import PropTypes from 'prop-types';
 import './user.css';
 import { useState } from 'react';
 
-function User({ img, price, title, display ,rating}) {
+function User({ img, price, title, display ,rating,id,delfun}) {
   const [buy,setbuy]=useState(false);
   const [dis,setdis]=useState()
+  const [del,setdel]=useState();
   const discountap=(offer)=>{alert(price+" purched "+offer+"% offer aplied are you sure to buy")
     function recipt(){
       setbuy(true);
         setdis(title-(offer/100*title))
         alert(`total bill: ${title - (offer / 100 * title)}`)
-        console.log("total bill: "(title-(offer/100*title)))
+        console.log("total bill: ",(title-(offer/100*title)))
         
     }
     recipt()
@@ -23,7 +24,7 @@ function User({ img, price, title, display ,rating}) {
         <h3>{price}</h3>
         <h4> Rating:<span style={{color:"red"}}>{rating}</span></h4>
         <h2>${dis?dis:title}</h2>
-        <button onClick={()=>discountap(20)}>Buy Now</button>
+        <button onClick={()=>discountap(20)}>Buy Now</button><button  onClick={()=>delfun(id)}>Delete</button>
         <p>{buy?"already purched":"Buy Now"}</p>
       </div>
     );
