@@ -5,7 +5,7 @@ import { useState } from 'react';
 function User({ img, price, title, display ,rating,id,delfun}) {
   const [buy,setbuy]=useState(false);
   const [dis,setdis]=useState()
-  const [del,setdel]=useState();
+  
   const discountap=(offer)=>{alert(price+" purched "+offer+"% offer aplied are you sure to buy")
     function recipt(){
       setbuy(true);
@@ -45,3 +45,4 @@ User.propTypes = {
 };
 
 export default User;
+// //  npx json-server --watch courcedata/data.json --port 3000 --static ./courcedata
