@@ -1,30 +1,46 @@
-import React, { use, useEffect, useState } from 'react'
-import useFetch from './useFetch'
-import User from './User'
-function Courcelist() {
-  
-    const [Courcelist1,error]=useFetch('http://localhost:3000/Courcelist1')
-    function delectcource(id){
-        console.log("hello")
-        const deleted=Courcelist1.filter((a)=>a.id!=id);
-        setcource(deleted);
-    }
+import React, { useEffect, useState } from 'react';
+import useFetch from './useFetch';
+import User from './User';
 
-    
-    // Courcelist1.sort((a,b)=>b.title-a.title);//sort method is used to sort price
-    // const rating=Courcelist1.filter((a)=>a.rating>4)//filter method is used to sort by rating
-  if(!Courcelist1){
-    console.log("hello",error)
-    return <>{!error&&<h1 style={{color:"black"}}>Loading...</h1>}
-        {error&&<p style={{color:"black"}}>{error}</p>}</>
+function Courcelist() {
+  const [Courcelist1, error] = useFetch('http://localhost:3000/Courcelist1');
+  const [list, setList] = useState([]);
+
+  // update list only when Courcelist1 changes
+  useEffect(() => {
+    if (Courcelist1) {
+      setList(Courcelist1);
+    }
+  }, [Courcelist1]);
+
+  function deleteCourse(id) {
+    const deleted = list.filter((a) => a.id !== id);
+    setList(deleted);
   }
 
-    const Courcelist=Courcelist1.map((val)=><User img={val.img} price={val.price} title={val.title} display={val.display} rating={val.rating} id={val.id} delfun={delectcource}/>);
-  return (
-    <>
-    {Courcelist}
-    </>
-  )
+  if (!Courcelist1) {
+    return (
+      <>
+        {!error && <h1 style={{ color: 'black' }}>Loading...</h1>}
+        {error && <p style={{ color: 'black' }}>{error}</p>}
+      </>
+    );
+  }
+
+  const courseList = list.map((val) => (
+    <User
+      key={val.id}
+      img={val.img}
+      price={val.price}
+      title={val.title}
+      display={val.display}
+      rating={val.rating}
+      id={val.id}
+      delfun={deleteCourse}
+    />
+  ));
+
+  return <>{courseList}</>;
 }
 
-export default Courcelist
+export default Courcelist;
