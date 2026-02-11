@@ -1,17 +1,9 @@
 import React, { use, useEffect, useState } from 'react'
+import useFetch from './useFetch'
 import User from './User'
 function Courcelist() {
-    const [Courcelist1,setcource]=useState()
-    const [error,seterror]=useState()
-    useEffect(()=>{setTimeout(() => {
-      fetch('http://localhost:3000/Courcelist1').then(Response=>{console.log(Response) 
-          if(!Response.ok){
-              throw Error("could't retrive data form server")
-          }
-          return Response.json()}
-          ).then(data=>setcource(data)).catch((e)=>{seterror(e.message)})
-    },1000)
-    },[])
+  
+    const [Courcelist1,error]=useFetch('http://localhost:3000/Courcelist1')
     function delectcource(id){
         console.log("hello")
         const deleted=Courcelist1.filter((a)=>a.id!=id);
